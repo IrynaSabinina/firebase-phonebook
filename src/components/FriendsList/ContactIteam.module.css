@@ -1,0 +1,7 @@
+.contactItem {
+    margin-top: 10px;
+}
+
+.contactItem:hover{
+    transform: scale(1.02);
+}

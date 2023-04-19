@@ -1,0 +1,13 @@
+.header {
+   
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 166, 0, 0.462);
+    display: flex;
+    justify-content: end;
+    
+    background-color: orange;
+    color: white;
+}
+.headerText {
+    margin-right: 10px;
+}
