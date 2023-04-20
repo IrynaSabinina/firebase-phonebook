@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { Home } from '../Home/Home';
 import {LoginForm} from "../../components/Login/LoginForm"
-import { toast } from 'react-toastify';
+
 
 
 export const RegistrationPage =()=>{

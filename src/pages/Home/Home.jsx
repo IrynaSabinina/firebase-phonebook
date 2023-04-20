@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged} from "firebase/auth";
 import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import styles from "./Home.module.css"
@@ -18,7 +18,7 @@ import { Footer } from '../../components/Footer/Footer';
 export const Home =() =>{
     const navigate = useNavigate();
  const [name, setName] = useState('')
- const [uid, setUid] = useState(localStorage.getItem("userUid"))
+ const uid = localStorage.getItem("userUid")
  const [friendNumber, setFriendNumber]=useState('')
  const [friendName, setFriendName] = useState('')
  const [myFriends, setMyFriends] = useState([])
@@ -31,7 +31,7 @@ setMyFriends(contacts)
 useEffect(()=>{
       onAuthStateChanged(auth, (user) => {
             if (user) {
-             const uid = user.uid;
+             
              setName(user.email)
             
              } else {
@@ -47,36 +47,35 @@ try{
     setDoc(users, {
       name: {name}});
       }catch(e){
-console.log(e.message)
+toast.error(e.message)
       }
     }
 
-const handleLogout = () => {               
-    signOut(auth).then(() => {
-    localStorage.removeItem("userToken")
-    localStorage.removeItem("userUid")
-    localStorage.removeItem("userEmail")
-    setMyFriends([])
-    setUid('')
-    navigate("/");
-    toast.success("Loged out successfully")
-        }).catch((error) => {
+// const handleLogout = () => {               
+//     signOut(auth).then(() => {
+//     localStorage.removeItem("userToken")
+//     localStorage.removeItem("userUid")
+//     localStorage.removeItem("userEmail")
+//     setMyFriends([])
+//     setUid('')
+//     navigate("/");
+//     toast.success("Loged out successfully")
+//         }).catch((error) => {
         
-        });
-    }
+//         });
+//     }
 
    const adFriend = async ()=>{
+    if(!friendName || !friendNumber) {
+      toast.error("Please write phone number and friends name")
+    }
 if(uid){
   try {
 const friend =  await doc(db, `users/${uid}/friend`, friendName);
-    
     setDoc(friend, {
       name: friendName,
       phone:friendNumber
-         });
-    
-
-    
+         }); 
   } catch (e) {
     console.error("Error adding document: ", e);
   }
@@ -99,9 +98,7 @@ const getFriends = async () =>{
       phone:(doc.data().phone)
     }
   
-    friendList.push(friendIteam)
-  
-   
+    friendList.push(friendIteam) 
   });
   setMyFriends(friendList)
 }
@@ -115,19 +112,17 @@ getFriends(uid)
 <Header name = {name}/>
 
 <nav>
-   <h1>Welcome to your PhoneBook</h1>
+   <h1 className={styles.text}>Welcome to your PhoneBook</h1>
   
-  <div>
-<button onClick={handleLogout} className={styles.outBtn}>
-    Logout
-    </button>
+  <div className={styles.inputBlock}>
+
     <PhoneInput
     defaultCountry="PL"
     placeholder="Enter phone number"
     value={friendNumber}
     onChange={setFriendNumber}/>
      <input
-    // type="text"
+    
     placeholder="Enter name"
     value={friendName}
     onChange={(e)=>{setFriendName(e.target.value)}}/>
