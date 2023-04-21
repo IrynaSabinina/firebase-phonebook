@@ -10,14 +10,12 @@ export const Avatar =({friendName, uid})=>{
       });
       
 useEffect (()=>{
-    if (!friendName) {setAvatar("")}
-}, [avatar, friendName]
+    if (!friendName) {setAvatar({image: undefined})}
+}, [friendName]
 )
 
       const onChangeImage = event => {
-       
           setAvatar( () => ({
-          
               image: event.target.files[0]
             }));
         }
@@ -31,11 +29,15 @@ if (avatar.image !== undefined && friendName){
 
     const storageRef = ref(storage, `avatars/${uid}/${friendName}`);
     uploadBytesResumable(storageRef, avatar.image);
+
+   
 }
     
 
+
+
 return <>
-<MDBFile id='customFile' type="file" placeholder="load friend photo" defaultValue={avatar.image} onChange={ (e) => onChangeImage(e)}/>
+<MDBFile id='customFile' type="file" placeholder="load friend photo" defaultValue={undefined} onChange={ (e) => onChangeImage(e)}/>
 
 </>
 

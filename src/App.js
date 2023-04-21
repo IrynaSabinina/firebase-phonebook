@@ -13,15 +13,15 @@ import { useEffect, useState } from 'react';
 import { getFriends } from './API/getFriends';
 
 function App() {
-  const [uid, setUid] = useState(localStorage.getItem("userUid"))
+  const [uid, setUid] = useState("")
   const [myFriends, setMyFriends] = useState([])
   useEffect(()=>{
    
-    
+    setUid(localStorage.getItem("userUid"))
    setMyFriends(getFriends(uid))
    
 
- }, [uid])
+ }, [uid ])
  
   return (
 
