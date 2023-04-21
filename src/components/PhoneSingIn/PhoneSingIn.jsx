@@ -1,5 +1,5 @@
 import { auth } from "../../firebase";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { useState } from 'react'
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 export const PhoneSingIn = ()=> {
 const [number, setNumber] = useState(null)
-const [verCode, setVerCode] = useState(null)
+let verCode= null
 
 auth.languageCode = 'it';
 

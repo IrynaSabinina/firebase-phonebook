@@ -8,7 +8,7 @@ import { SingIn } from './components/SingIn/SingIn';
 import {  RegistrationPage } from './pages/LogIn/LogInPage';
 import './App.css';
 import { Home } from './pages/Home/Home';
-import { PhoneSingIn, PhoneSingUp } from './components/PhoneSingIn/PhoneSingIn';
+// import { PhoneSingIn, PhoneSingUp } from './components/PhoneSingIn/PhoneSingIn';
 import { useEffect, useState } from 'react';
 import { getFriends } from './API/getFriends';
 
