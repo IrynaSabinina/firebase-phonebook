@@ -23,8 +23,8 @@ export const SingIn = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user.id);
-        localStorage.userToken = user.accessToken;
+        // console.log(user.id);
+        localStorage.userUid = user.uid;
         localStorage.userEmail = user.email;
           navigate("/home");
         

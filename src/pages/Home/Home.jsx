@@ -73,8 +73,7 @@ const friend =  await doc(db, `users/${uid}/friend`, friendName);
  setFriendNumber('')
  setFriendName('')
  getFriends(uid)
-//  setAvatar('')
-//  console.log(avatar)
+
 
    }
 
@@ -113,9 +112,10 @@ const getFriends = async () =>{
     <MDBInput
     label='Enter Phone number'
     id='typePhone' 
-    type='tel'
+    type="tel"
     value={friendNumber}
-    onChange={(e)=>{setFriendNumber(e.target.value)}}/>
+    onChange={(e)=>{
+      {setFriendNumber(e.target.value)}}}/>
 
      <MDBInput
      id='form1'
