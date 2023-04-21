@@ -91,13 +91,13 @@ export const LoginForm =()=>{
                                 </button>
                             </div>  
                             <div>
-                                <Link to="phonesingup">
+                                {/* <Link to="phonesingup">
                                 <button className={styles.lBtn} type="submit"                              
                                     // onClick={onLogin}                                        
                                     >      
                                     Sing in with Phone                                                                  
                                 </button>
-                                    </Link>
+                                    </Link> */}
                             </div>                                       
                         </form>
                        

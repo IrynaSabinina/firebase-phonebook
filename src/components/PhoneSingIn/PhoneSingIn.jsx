@@ -1,49 +1,57 @@
 import { auth } from "../../firebase";
-import { getAuth, RecaptchaVerifier } from "firebase/auth";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { signInWithPhoneNumber } from "firebase/auth";
-// import { toast } from "react-toastify";
+
 
 export const PhoneSingIn = ()=> {
-const [number, setNumber] = useState("")
-const [verCode, setVerCode] = useState("")
+const [number, setNumber] = useState(null)
+const [verCode, setVerCode] = useState(null)
 
-// const recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {}, auth);
-// recaptchaVerifier.render()
-const recaptchaVerifierconnt = new RecaptchaVerifier('recaptcha-container', {}, auth);
-const appVerifier = recaptchaVerifierconnt();
+auth.languageCode = 'it';
+
+
+window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {}, auth);
+window.recaptchaVerifier.render()
+
+const appVerifier = window.recaptchaVerifier;
+
+
 signInWithPhoneNumber(auth, number, appVerifier)
     .then((confirmationResult) => {
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      console.log("Success")
-      window.confirmationResult = confirmationResult;
-      // ...
+      confirmationResult.confirm(verCode).then((result) => {
+     const user = result.user;
+        console.log(user)
     }).catch((error) => {
-      // Error; SMS not sent
-      // ...
+      console.log(error.message)
+     
     });
+  })
+
+
     return <>
     <form> 
 
     <PhoneInput
     defaultCountry="PL"
     placeholder="Enter phone number"
-    value={number}
+    defaultValue={number}
     onChange={setNumber}/>
   
       <button type="submit"  >Send parol</button>
     </form>
-
+    {/* <div
+      id="recaptcha-container"
+      class="justify-center flex"
+ ></div>    */}
       <Link to="/">
         <button>Cancel</button>
       </Link>
-      <input type="number" onChange={setVerCode}/>
-      <button onClick={signInWithPhoneNumber}>
-        Send parol
-      </button>
+      {/* <input type="number" onChange={setVerCode}/> */}
+      {/* <button onClick={signInWithPhoneNumber}> */}
+        {/* Send parol */}
+      {/* </button> */}
     </>
 }
