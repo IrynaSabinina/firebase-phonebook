@@ -23,7 +23,7 @@ useEffect(()=>{
 
 return <>
 <div>
-<img className={styles.avatarContact} src={avatarUrl} alt="sorry something wrong" width='25px' height="25px"/>
+<img className={styles.avatarContact} src={avatarUrl} alt="sorry something wrong" width='35px' height="35px"/>
     </div></>
 }
 

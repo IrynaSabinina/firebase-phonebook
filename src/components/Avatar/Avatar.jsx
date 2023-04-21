@@ -30,7 +30,7 @@ if (avatar.image !== undefined && friendName){
 
 
     const storageRef = ref(storage, `avatars/${uid}/${friendName}`);
-    const uploadTask = uploadBytesResumable(storageRef, avatar.image);
+    uploadBytesResumable(storageRef, avatar.image);
 }
     
 
