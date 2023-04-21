@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+
 import { getStorage, ref, deleteObject } from "firebase/storage";
 
 import { ContactItem } from "./ContactItem";
 import { db } from "../../firebase";
-import { collection, addDoc, doc, updateDoc, setDoc, getDoc, query, getDocs, deleteDoc } from "firebase/firestore"; 
+import {  doc,deleteDoc } from "firebase/firestore"; 
 
 export const FriendsList =({contacts, uid, getFriends})=>{
   const storage = getStorage();

@@ -1,7 +1,7 @@
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import styles from "./ContactIteam.module.css"
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 export const AvatarContact =({uid,friendName})=>{
 const [avatarUrl, seAvatarUrl]=useState('')

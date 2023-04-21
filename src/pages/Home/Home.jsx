@@ -1,17 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged} from "firebase/auth";
-// import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { auth, db } from '../../firebase';
-// import { useNavigate } from 'react-router-dom';
 import styles from "./Home.module.css"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Header } from '../../components/Header/Header';
 import { collection, doc, setDoc, query, getDocs, } from "firebase/firestore"; 
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
-
-import PhoneInput from 'react-phone-number-input';
 import { FriendsList } from '../../components/FriendsList/FriendsList';
 import { Footer } from '../../components/Footer/Footer';
 import { Avatar } from '../../components/Avatar/Avatar';
@@ -119,7 +115,8 @@ const getFriends = async () =>{
     id='typePhone' 
     type='tel'
     value={friendNumber}
-    onChange={setFriendNumber}/>
+    onChange={(e)=>{setFriendNumber(e.target.value)}}/>
+
      <MDBInput
      id='form1'
      label="Enter name"
