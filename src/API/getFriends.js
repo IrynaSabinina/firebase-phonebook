@@ -12,7 +12,8 @@ export const getFriends = async (uid) =>{
   
       const friendIteam = {
         name: (doc.data().name),
-        phone:(doc.data().phone)
+        phone:(doc.data().phone),
+        avatar:(doc.data().avatar)
       }
     
       friendList.push(friendIteam)

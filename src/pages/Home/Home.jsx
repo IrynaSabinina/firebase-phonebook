@@ -1,27 +1,31 @@
 
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged} from "firebase/auth";
+// import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { auth, db } from '../../firebase';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styles from "./Home.module.css"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Header } from '../../components/Header/Header';
 import { collection, doc, setDoc, query, getDocs, } from "firebase/firestore"; 
-import { MDBBtn } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 
 import PhoneInput from 'react-phone-number-input';
 import { FriendsList } from '../../components/FriendsList/FriendsList';
 import { Footer } from '../../components/Footer/Footer';
-// import { Header } from '../../components/Navigation/Navigation';
+import { Avatar } from '../../components/Avatar/Avatar';
+
 
 export const Home =() =>{
-    const navigate = useNavigate();
+// const navigate = useNavigate();
  const [name, setName] = useState('')
  const uid = localStorage.getItem("userUid")
  const [friendNumber, setFriendNumber]=useState('')
  const [friendName, setFriendName] = useState('')
+
  const [myFriends, setMyFriends] = useState([])
+
  useEffect(()=>{
   const contacts = getFriends(uid)
 
@@ -41,6 +45,8 @@ useEffect(()=>{
          
     }, [myFriends])
 
+
+
  if(uid){
 try{
   const users = doc(db, "users", uid);
@@ -51,19 +57,6 @@ toast.error(e.message)
       }
     }
 
-// const handleLogout = () => {               
-//     signOut(auth).then(() => {
-//     localStorage.removeItem("userToken")
-//     localStorage.removeItem("userUid")
-//     localStorage.removeItem("userEmail")
-//     setMyFriends([])
-//     setUid('')
-//     navigate("/");
-//     toast.success("Loged out successfully")
-//         }).catch((error) => {
-        
-//         });
-//     }
 
    const adFriend = async ()=>{
     if(!friendName || !friendNumber) {
@@ -74,7 +67,8 @@ if(uid){
 const friend =  await doc(db, `users/${uid}/friend`, friendName);
     setDoc(friend, {
       name: friendName,
-      phone:friendNumber
+      phone:friendNumber,
+      
          }); 
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -82,6 +76,10 @@ const friend =  await doc(db, `users/${uid}/friend`, friendName);
 }
  setFriendNumber('')
  setFriendName('')
+ getFriends(uid)
+//  setAvatar('')
+//  console.log(avatar)
+
    }
 
 const getFriends = async () =>{
@@ -95,7 +93,8 @@ const getFriends = async () =>{
 
     const friendIteam = {
       name: (doc.data().name),
-      phone:(doc.data().phone)
+      phone:(doc.data().phone),
+      // avatar:(doc.data().avatar)
     }
   
     friendList.push(friendIteam) 
@@ -103,7 +102,7 @@ const getFriends = async () =>{
   setMyFriends(friendList)
 }
 
-getFriends(uid)
+// getFriends(uid)
 
 
 
@@ -115,31 +114,30 @@ getFriends(uid)
    <h1 className={styles.text}>Welcome to your PhoneBook</h1>
   
   <div className={styles.inputBlock}>
-
-    <PhoneInput
-    defaultCountry="PL"
-    placeholder="Enter phone number"
+    <MDBInput
+    label='Enter Phone number'
+    id='typePhone' 
+    type='tel'
     value={friendNumber}
     onChange={setFriendNumber}/>
-     <input
-    
-    placeholder="Enter name"
+     <MDBInput
+     id='form1'
+     label="Enter name"
+    // placeholder="Enter name"
     value={friendName}
     onChange={(e)=>{setFriendName(e.target.value)}}/>
 
 
+<Avatar friendName={friendName} uid={uid}/>
 <MDBBtn color='success' onClick={adFriend}>
 Add contact
       </MDBBtn>
   
 </div>
 
-{/* <MDBBtn outline color='warning' onClick={getFriends()}>
-update friend list
-      </MDBBtn> */}
 
 <div>
- <FriendsList contacts={myFriends} uid={uid}/>
+ <FriendsList contacts={myFriends} uid={uid} getFriends={getFriends} />
 
 </div>
 </nav>

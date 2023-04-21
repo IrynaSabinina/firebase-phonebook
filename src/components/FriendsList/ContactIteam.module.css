@@ -5,3 +5,7 @@
 .contactItem:hover{
     transform: scale(1.02);
 }
+
+.avatarContact{
+    border-radius: 50%;
+}

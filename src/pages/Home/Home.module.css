@@ -11,8 +11,10 @@
 
 .inputBlock{
 width: 40%;
-    display: inline-block;
+    display: inline-flex;
     flex-direction: column;
+   gap: 10px;
+   justify-content: center;
 
 }
 
