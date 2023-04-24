@@ -25,3 +25,13 @@ export const auth = getAuth(app);
 // const analytics = getAnalytics(app);
 export const db = getFirestore(app);
 export default firebaseConfig;
+
+
+
+
+
+
+
+
+
+
