@@ -74,6 +74,6 @@ cursor: pointer;
 @media (min-width: 768px) {
     .registrationBox {
       
-      max-width: 600px;
+      width: 600px;
     }
   }
