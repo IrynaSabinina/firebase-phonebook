@@ -49,12 +49,12 @@ export const LoginForm =()=>{
         <>
             <main className={styles.dropBox}>        
                 <section className={styles.registrationBox}>                                            
-                        <h2> Please login first</h2>                       
+                        <h2> Please, login first</h2>                       
                                                        
                             <GoogleAuth/>
                         <form >  
                             <div className={styles.inputBox}>
-                            <div >
+                            
                                 <label className={styles.formText}>
                                     Email address
                                 <input className={styles.formInput}
@@ -66,9 +66,9 @@ export const LoginForm =()=>{
                                     onChange={(e)=>setEmail(e.target.value)}
                                     />
                                 </label>
-                            </div>
+                            
 
-                            <div className={styles.inputRightBox}>
+                            {/* <div className={styles.inputRightBox}> */}
                                 <label >
                                     Password
                                 
@@ -80,7 +80,7 @@ export const LoginForm =()=>{
                                     onChange={(e)=>setPassword(e.target.value)}
                                     />
                                 </label>
-                            </div>
+                            {/* </div> */}
                                                 
                                     </div>                                            
                             <div>
