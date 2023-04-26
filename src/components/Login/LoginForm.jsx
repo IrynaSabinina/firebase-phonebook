@@ -52,7 +52,7 @@ export const LoginForm =()=>{
                         <h2> Please, login first</h2>                       
                                                        
                             <GoogleAuth/>
-                        <form >  
+                        <form className={styles.formContainer}>  
                             <div className={styles.inputBox}>
                             
                                 <label className={styles.formText}>
