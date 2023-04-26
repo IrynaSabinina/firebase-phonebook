@@ -12,6 +12,7 @@ import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyCZO6o_EOl0qlta2G_UHS_dkS9iT8wkpdo",
   authDomain: "hello-test-16984.firebaseapp.com",
+  databaseURL: "https://hello-test-16984-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "hello-test-16984",
   storageBucket: "hello-test-16984.appspot.com",
   messagingSenderId: "194116585917",
