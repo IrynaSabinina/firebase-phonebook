@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import reCAPTCHA from "react-google-recaptcha"
+import Reaptcha from 'reaptcha';
+
 import { auth } from "../../firebase";
 
 import "react-toastify/dist/ReactToastify.css";
 import loginStyles from "../Login/LoginForm.module.css"
 
 export const SingIn = () => {
+  // const captchaRef = useRef(null)
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const token = captchaRef.current.getValue();
+  const [captchaToken, setCaptchaToken] = useState(null);
+const captchaRef = useRef(null);
 
   
   const onSubmit = async (e) => {
@@ -34,6 +41,13 @@ export const SingIn = () => {
         // ..
       });
   };
+
+  const verify = () =>{
+    captchaRef.current.getResponse().then(res => {
+        setCaptchaToken(res)
+    })
+
+}
 
   return (
     <main className={loginStyles.dropBox}>        
@@ -67,6 +81,7 @@ export const SingIn = () => {
             </label>
           </div>
 </div>
+<Reaptcha sitekey="6LeCwLwlAAAAAL5xIA78yiIe4iTf7VyYYvFjT99W" ref={captchaRef} onVerify={verify} />
           <button className={loginStyles.lBtn} type="submit" onClick={onSubmit}>
             Sign in
           </button>
