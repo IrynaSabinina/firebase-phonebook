@@ -8,6 +8,7 @@ import {LoginForm} from "../../components/Login/LoginForm"
 
 
 export const RegistrationPage =()=>{
+ 
   const [loged, setLoged] = useState(false)
   useEffect(()=>{
     if(localStorage.getItem("userUid")){

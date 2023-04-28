@@ -8,13 +8,15 @@ import { SingIn } from './components/SingIn/SingIn';
 import {  RegistrationPage } from './pages/LogIn/LogInPage';
 import './App.css';
 import { Home } from './pages/Home/Home';
-// import { PhoneSingIn, PhoneSingUp } from './components/PhoneSingIn/PhoneSingIn';
+
 import { useEffect, useState } from 'react';
 import { getFriends } from './API/getFriends';
+
 
 function App() {
   const [uid, setUid] = useState("")
   const [myFriends, setMyFriends] = useState([])
+  
   useEffect(()=>{
    
     setUid(localStorage.getItem("userUid"))
@@ -23,6 +25,8 @@ function App() {
 
  }, [uid ])
  
+
+
   return (
 
     <Router>
