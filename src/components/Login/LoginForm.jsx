@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {  signInWithEmailAndPassword} from 'firebase/auth';
+import {  signInAnonymously, signInWithEmailAndPassword} from 'firebase/auth';
 import { auth } from '../../firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
 import styles from "./LoginForm.module.css"
 import { toast } from 'react-toastify';
 import { GoogleAuth } from '../GoogleAuth/GoogleAuth';
+// import { An } from './An';
 
 
 export const LoginForm =()=>{
@@ -13,10 +14,10 @@ export const LoginForm =()=>{
     const [password, setPassword] = useState('');
     
 
-       
     const onLogin = (e) => {
         e.preventDefault();
 
+       
         if (email === "" || !email.includes("@")) {
             toast.error("Your email should includes symbol -@ ")
         }
@@ -32,18 +33,25 @@ export const LoginForm =()=>{
             // const friends = getFriends(user.uid)
             navigate("/home")
            }
-            
+           
         })
         .catch((error) => {
-            
-            const errorMessage = error.message;
-            toast.error(errorMessage)
+            throw error 
+            console.log("111")
+            if(!error.message){
+                console.loge("all is ok")
+            } else{
+
+                const errorMessage = error.message;
+                toast.error(errorMessage)
+                console.log("gjfgfjhjhj")
+            }
         });
        
     }
 
 
-
+  
  
     return(
         <>
@@ -100,13 +108,14 @@ export const LoginForm =()=>{
                                     </Link> */}
                             </div>                                       
                         </form>
-                       
                         <p className="text-sm text-black text-center">
                             No account yet? -  
                             <NavLink to="/singin">
                                 Sign in
                             </NavLink>
                         </p>
+                        {/* <An/> */}
+                        
                 </section>
             </main>
         </>

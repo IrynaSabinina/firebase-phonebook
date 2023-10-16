@@ -1,32 +1,26 @@
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../firebase";
 
-export const getFriends = async (uid=null) =>{
+export const getFriends = async (uid) =>{
     const friendList = []
   if (uid) {
     const q = query(collection(db, `users/${uid}/friend`));
-  
+
     const querySnapshot = await getDocs(q);
     
     querySnapshot.forEach((doc) => {
-  
       const friendIteam = {
         name: (doc.data().name),
         phone:(doc.data().phone)
       }
-    
+      
       friendList.push(friendIteam)
-    
-     
+      
+      
     });
+    console.log(friendList)
     
-
-
-
-
-
-
-
-  }
+    
     return friendList
+  }
   }

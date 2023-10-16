@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./Gallery.module.css"
 import { MDBBtn } from "mdb-react-ui-kit";
-export const Gallery = () =>{
+
+import { collection, doc, getDocs, query, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+
+
+
+export const Gallery = ({uid, email}) =>{
     const [myUrl, setMyUrl] = useState('')
     const firebaseApp = getApp()
     const storage = getStorage()
@@ -35,6 +41,18 @@ toast.message("not found, try again")
         break;
     }
   });
+
+async function addOnclick(){
+  const fakepath = "dhsgjdhsgdjhsd/jhabdhadjhajsdha444444444"
+  // let newuid=toString(uid)
+  await setDoc(doc(db, fakepath), {
+    name: "Los Angeles",
+    state: "CA",
+    country: "USA"
+  });
+  
+
+  }
   
 //   console.loge(myUrl)
     
@@ -46,6 +64,11 @@ toast.message("not found, try again")
 <img className={styles.imgDeveloper} src={myUrl} alt="sorry something wrong" />
 <h4> thank you for using Phonebook
 </h4>
+<button
+type="button" onClick={addOnclick}>
+add collection
+</button>
+
 <Link to="/home">
 
 <MDBBtn type="button" color='warning'>Back home</MDBBtn>
